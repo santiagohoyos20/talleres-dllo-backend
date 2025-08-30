@@ -58,5 +58,5 @@ function missingNumbers(list) {
   return faltantes;
 }
 
-console.log(missingNumbers(test2));
+// console.log(missingNumbers(test2));
 
