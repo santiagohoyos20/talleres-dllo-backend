@@ -93,4 +93,25 @@ function conversionRomana(roman) {
   return total;
 }
 
-console.log(conversionRomana("MCMXCVII")); 
+// console.log(conversionRomana("MCMXCVII"));
+
+function descomposicion(entrada) {
+  const palabras = entrada.split(",");
+  const palabraADescomponer = palabras[0];
+  const diccionario = palabras.slice(1);
+
+  for (let i = 0; i < diccionario.length; i++) {
+    for (let j = i + 1; j < diccionario.length; j++) {
+      if (diccionario[i] + diccionario[j] === palabraADescomponer) {
+        return [diccionario[i], diccionario[j]];
+      }
+      if (diccionario[j] + diccionario[i] === palabraADescomponer) {
+        return [diccionario[j], diccionario[i]];
+      }
+    }
+  }
+
+  return [];
+}
+
+console.log(descomposicion("malhumor,al,hum,humor,m,mal,malhu"));
