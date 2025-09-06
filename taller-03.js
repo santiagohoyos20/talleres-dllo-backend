@@ -95,6 +95,9 @@ function conversionRomana(roman) {
 
 // console.log(conversionRomana("MCMXCVII"));
 
+
+// PUNTO 4
+
 function descomposicion(entrada) {
   const palabras = entrada.split(",");
   const palabraADescomponer = palabras[0];
