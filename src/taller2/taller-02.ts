@@ -22,7 +22,7 @@ export function includes(list: any[], x: any): boolean {
 
 // console.log(includes(test, 4))
 
-export function sum(list: any[]): number {
+export function sum(list: any[]): any {
   let total = 0;
   for (const item of list) {
     total += item;
