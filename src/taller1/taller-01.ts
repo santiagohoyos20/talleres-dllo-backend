@@ -1,31 +1,31 @@
 // Punto 1
-function convertidorTemp(tempCentigrados){
+export function convertidorTemp(tempCentigrados: number): number {
   return tempCentigrados * 9 / 5 + 32
 }
 
-console.log(convertidorTemp(100))
+// console.log(convertidorTemp(100))
 
 // Punto 2
 // Si signo = 1, se retorna el resultado positivo
 // Si signo = -1, se retorna el resultado negativo
-function resolvedor(a, b, c, signo){
+export function resolvedor(a: number, b: number, c: number, signo: number): number {
   const discriminante = Math.pow(b, 2) - 4 * a * c
   if (discriminante < 0){
     return NaN
   }
   return (-b + (signo === 1 ? 1 : -1) * Math.sqrt(discriminante)) / (2 * a)
 }
-console.log(resolvedor(1, 5, 4, -1))
+// console.log(resolvedor(1, 5, 4, -1))
 
 // Punto 3
-function mejorParidad(num){
-    return num % 2 === 0
-}
+  export function mejorParidad(num: number): boolean {
+      return num % 2 === 0
+  }
 
-console.log(mejorParidad(2))
+// console.log(mejorParidad(2))
 
 // Punto 4
-function peorParidad(num) {
+export function peorParidad(num: number): string {
   if (num === 0) {
     return "par";
   } else if (num === 1) {
@@ -49,6 +49,7 @@ function peorParidad(num) {
   } else if (num === 10) {
     return "par";
   }
+  return "Número fuera de rango";
 }
 
-console.log(peorParidad(7))
+// console.log(peorParidad(7))

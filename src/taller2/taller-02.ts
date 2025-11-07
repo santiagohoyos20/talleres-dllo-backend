@@ -1,4 +1,4 @@
-function findMax(list) {
+export function findMax(list: any[]) {
   let max = list[0];
   for (const item of list) {
     if (item > max) {
@@ -11,9 +11,9 @@ function findMax(list) {
 const test = [3, 17, -1, 4, -19];
 // console.log(findMax(test))
 
-function includes(list, num) {
+export function includes(list: any[], x: any): boolean {
   for (const item of list) {
-    if (num === item) {
+    if (x === item) {
       return true;
     }
   }
@@ -22,7 +22,7 @@ function includes(list, num) {
 
 // console.log(includes(test, 4))
 
-function sum(list) {
+export function sum(list: any[]): number {
   let total = 0;
   for (const item of list) {
     total += item;
@@ -34,7 +34,7 @@ function sum(list) {
 
 const test2 = [7, 2, 4, 6, 3, 9];
 
-function missingNumbers(list) {
+export function missingNumbers(list: number[]): number[] {
   let faltantes = [];
   let temp;
   for (let i = 0; i < list.length; i++) {

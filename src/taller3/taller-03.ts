@@ -1,5 +1,5 @@
 // PUNTO 1
-function filterVocales(letter) {
+export function filterVocales(letter: string): boolean {
   const vocales = ["a", "e", "i", "o", "u"];
   if (vocales.some((l) => l === letter)) {
     return true;
@@ -8,7 +8,7 @@ function filterVocales(letter) {
   }
 }
 
-function filterConsonantes(letter) {
+export function filterConsonantes(letter: string) {
   const consonantes = [
     "b",
     "c",
@@ -39,19 +39,17 @@ function filterConsonantes(letter) {
   }
 }
 
-function desglosarString(string, command) {
+export function desglosarString(string: string, command: "vocales" | "consonantes"): number {
   return string
     .split("")
-    .filter((letter) =>
+    .filter((letter: string) =>
       command === "vocales" ? filterVocales(letter) : filterConsonantes(letter)
     ).length;
 }
-
 // console.log(desglosarString("murcielagos", "vocales"));
 
 // PUNTO 2
-
-function twoSum(numbers, target) {
+export function twoSum(numbers: number[], target: number): number[] {
   let hashmap = new Map();
   let complement, x;
   for (let i = 0; i < numbers.length; i++) {
@@ -63,12 +61,11 @@ function twoSum(numbers, target) {
   }
   return [];
 }
-
 // console.log(twoSum([3, 4, 2], 6));
 
 // PUNTO 3
-function conversionRomana(roman) {
-  const ROMAN_VALUES = {
+export function conversionRomana(roman: string): number {
+  const ROMAN_VALUES: { [key: string]: number } = {
     I: 1,
     V: 5,
     X: 10,
@@ -92,13 +89,10 @@ function conversionRomana(roman) {
   }
   return total;
 }
-
 // console.log(conversionRomana("MCMXCVII"));
 
-
 // PUNTO 4
-
-function descomposicion(entrada) {
+export function descomposicion(entrada: string) {
   const palabras = entrada.split(",");
   const palabraADescomponer = palabras[0];
   const diccionario = palabras.slice(1);
@@ -116,5 +110,4 @@ function descomposicion(entrada) {
 
   return [];
 }
-
-console.log(descomposicion("malhumor,al,hum,humor,m,mal,malhu"));
+// console.log(descomposicion("malhumor,al,hum,humor,m,mal,malhu"));
