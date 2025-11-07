@@ -1,9 +1,7 @@
 parciales/
-express/
 
 # Node modules
 /node_modules/
-express/node_modules/
 
 # Environment files (no subir secretos)
 .env
