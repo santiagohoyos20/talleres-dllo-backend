@@ -6,6 +6,55 @@ import { convertidorTemp, resolvedor, mejorParidad, peorParidad } from "./taller
 const taller1Routes = Router();
 
 // DECLARE ENDPOINT FUNCTIONS
+/**
+ * @swagger
+ * /taller1/convertidor-temperatura:
+ *   post:
+ *     tags:
+ *       - Taller 1
+ *     summary: Convertir temperatura de Celsius a Fahrenheit
+ *     description: Recibe una temperatura en grados Celsius y retorna su equivalente en Fahrenheit.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - celsius
+ *             properties:
+ *               celsius:
+ *                 type: number
+ *                 description: Temperatura en grados Celsius
+ *                 example: 25
+ *     responses:
+ *       200:
+ *         description: Conversión exitosa
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Success.
+ *                 fahrenheit:
+ *                   type: number
+ *                   example: 77
+ *       500:
+ *         description: Error en la conversión
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error.
+ *                 error:
+ *                   type: string
+ *                   example: Missing field 'celsius'.
+ */
 function convertidorTemperatura(request: Request, response: Response) {
     try {
         const { celsius } = request.body;
@@ -30,6 +79,71 @@ function convertidorTemperatura(request: Request, response: Response) {
     }
 }
 
+/**
+ * @swagger
+ * /taller1/resolvedor:
+ *   post:
+ *     tags:
+ *       - Taller 1
+ *     summary: Resolver ecuación cuadrática
+ *     description: Resuelve una ecuación cuadrática de la forma ax² + bx + c = 0 usando la fórmula general. El parámetro 'signo' determina si se usa el + o - en la fórmula.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - a
+ *               - b
+ *               - c
+ *               - signo
+ *             properties:
+ *               a:
+ *                 type: number
+ *                 description: Coeficiente a de la ecuación cuadrática
+ *                 example: 1
+ *               b:
+ *                 type: number
+ *                 description: Coeficiente b de la ecuación cuadrática
+ *                 example: -5
+ *               c:
+ *                 type: number
+ *                 description: Coeficiente c de la ecuación cuadrática
+ *                 example: 6
+ *               signo:
+ *                 type: number
+ *                 description: Determina qué raíz calcular (1 para +, -1 para -)
+ *                 enum: [1, -1]
+ *                 example: 1
+ *     responses:
+ *       200:
+ *         description: Cálculo exitoso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Success.
+ *                 resultado:
+ *                   type: number
+ *                   example: 3
+ *       500:
+ *         description: Error en el cálculo
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error.
+ *                 error:
+ *                   type: string
+ *                   example: Missing required fields.
+ */
 function postResolvedor(request: Request, response: Response) {
     try {
         const { a, b, c, signo } = request.body;
@@ -61,6 +175,55 @@ function postResolvedor(request: Request, response: Response) {
 
 }
 
+/**
+ * @swagger
+ * /taller1/mejor-paridad:
+ *   post:
+ *     tags:
+ *       - Taller 1
+ *     summary: Verificar paridad (método optimizado)
+ *     description: Determina si un número es par o impar usando el método más eficiente (operador módulo o bitwise).
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - number
+ *             properties:
+ *               number:
+ *                 type: number
+ *                 description: Número a verificar
+ *                 example: 42
+ *     responses:
+ *       200:
+ *         description: Verificación exitosa
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Success.
+ *                 par:
+ *                   type: boolean
+ *                   example: true
+ *       500:
+ *         description: Error en la verificación
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error.
+ *                 error:
+ *                   type: string
+ *                   example: Missing field 'number'.
+ */
 function postMejorParidad(request: Request, response: Response) {
     try {
         const { number } = request.body;
@@ -84,6 +247,55 @@ function postMejorParidad(request: Request, response: Response) {
     }
 }
 
+/**
+ * @swagger
+ * /taller1/peor-paridad:
+ *   post:
+ *     tags:
+ *       - Taller 1
+ *     summary: Verificar paridad (método no optimizado)
+ *     description: Determina si un número es par o impar usando un método menos eficiente (probablemente iterativo o recursivo).
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - number
+ *             properties:
+ *               number:
+ *                 type: number
+ *                 description: Número a verificar
+ *                 example: 2
+ *     responses:
+ *       200:
+ *         description: Verificación exitosa
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Success.
+ *                 par:
+ *                   type: boolean
+ *                   example: true
+ *       500:
+ *         description: Error en la verificación
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Error.
+ *                 error:
+ *                   type: string
+ *                   example: Missing field 'number'.
+ */
 function postPeorParidad(request: Request, response: Response) {
     try {
         const { number } = request.body;
