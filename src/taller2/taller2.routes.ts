@@ -5,44 +5,88 @@ import { findMax, includes, sum, missingNumbers } from "./taller-02";
 const taller2Routes = Router();
 
 // DECLARE ENDPOINT FUNCTIONS
-async function getMax(request: Request, response: Response) {
-    const { list } = request.body;
-    const max = findMax(list);
+function getMax(request: Request, response: Response) {
+    try {
+        const { list } = request.body;
+        if (list === undefined || list === null) {
+            throw new Error("Missing field 'list'.");
+        }
+        const max = findMax(list);
+        response.status(200).json({
+            message: "Success.",
+            max: max,
+        });
+    }
+    catch (error: any) {
+        response.status(500).json({
+            message: "Error.",
+            error: error.message,
+        });
+    }
 
-    response.status(200).json({
-        message: "Success.",
-        max: max,
-    });
 }
 
-async function getIncludes(request: Request, response: Response) {
-    const { list, x } = request.body;
-    const includesX = includes(list, x);
+function getIncludes(request: Request, response: Response) {
+    try {
+        const { list, x } = request.body;
+        if (list === undefined || list === null || x === undefined || x === null) {
+            throw new Error("Missing fields 'list' or 'x'.");
+        }
 
-    response.status(200).json({
-        message: "Success.",
-        includes: includesX,
-    });
+        const includesX = includes(list, x);
+        response.status(200).json({
+            message: "Success.",
+            includes: includesX,
+        });
+    }
+    catch (error: any) {
+        response.status(500).json({
+            message: "Error.",
+            error: error.message,
+        });
+    }
 }
 
-async function getSum(request: Request, response: Response) {
-    const { list } = request.body;
-    const suma = sum(list);
+function getSum(request: Request, response: Response) {
+    try {
+        const { list } = request.body;
+        if (list === undefined || list === null) {
+            throw new Error("Missing field 'list'.");
+        }
+        const suma = sum(list);
 
-    response.status(200).json({
-        message: "Success.",
-        suma: suma,
-    });
+        response.status(200).json({
+            message: "Success.",
+            suma: suma,
+        });
+    }
+    catch (error: any) {
+        response.status(500).json({
+            message: "Error.",
+            error: error.message,
+        });
+    }
 }
 
-async function getMissingNumbers(request: Request, response: Response) {
-    const { list } = request.body;
-    const missing = missingNumbers(list);
+function getMissingNumbers(request: Request, response: Response) {
+    try {
+        const { list } = request.body;
+        if (list === undefined || list === null) {
+            throw new Error("Missing field 'list'.");
+        }
+        const missing = missingNumbers(list);
 
-    response.status(200).json({
-        message: "Success.",
-        missing: missing,
-    });
+        response.status(200).json({
+            message: "Success.",
+            missing: missing,
+        });
+    }
+    catch (error: any) {
+        response.status(500).json({
+            message: "Error.",
+            error: error.message,
+        });
+    }
 }
 
 // DECLARE ENDPOINTS

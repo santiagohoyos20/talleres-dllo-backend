@@ -5,50 +5,100 @@ import { filterVocales, filterConsonantes, desglosarString, twoSum, conversionRo
 const taller3Routes = Router();
 
 // DECLARE ENDPOINT FUNCTIONS
-async function desglosar(request: Request, response: Response) {
-    const { string, command } = request.body;
-    const desglosado = desglosarString(string, command);
-    const resultado: Record<string, any> = {
-        message: "Success.",
-    }
-    if (command === "vocales") {
-        resultado["vocales"] = desglosado
-    }
-    else {
-        resultado["consonantes"] = desglosado
-    }
+function desglosar(request: Request, response: Response) {
+    try {
+        const { string, command } = request.body;
+        if (
+            string === undefined || string === null ||
+            command === undefined || command === null
+        ) {
+            throw new Error("Missing required fields: 'string' or 'command'.");
+        }
 
-    response.status(200).json(resultado);
+        const desglosado = desglosarString(string, command);
+        const resultado: Record<string, any> = {
+            message: "Success.",
+        }
+        if (command === "vocales") {
+            resultado["vocales"] = desglosado
+        }
+        else {
+            resultado["consonantes"] = desglosado
+        }
+
+        response.status(200).json(resultado);
+    }
+    catch (error: any) {
+        response.status(500).json({
+            message: "Error.",
+            error: error.message,
+        });
+    }
 }
 
-async function getTwoSum(request: Request, response: Response) {
-    const { numbers, target } = request.body;
-    const resultado = twoSum(numbers, target);
+function getTwoSum(request: Request, response: Response) {
+    try {
+        const { numbers, target } = request.body;
+        if (
+            numbers === undefined || numbers === null ||
+            target === undefined || target === null
+        ) {
+            throw new Error("Missing required fields: 'numbers' or 'target'.");
+        }
 
-    response.status(200).json({
-        message: "Success.",
-        resultado: resultado,
-    });
+        const resultado = twoSum(numbers, target);
+
+        response.status(200).json({
+            message: "Success.",
+            resultado: resultado,
+        });
+    }
+    catch (error: any) {
+        response.status(500).json({
+            message: "Error.",
+            error: error.message,
+        });
+    }
 }
 
-async function getConversionRomana(request: Request, response: Response) {
-    const { roman } = request.body;
-    const resultado = conversionRomana(roman);
+function getConversionRomana(request: Request, response: Response) {
+    try {
+        const { roman } = request.body;
+        if (roman === undefined || roman === null) {
+            throw new Error("Missing field 'roman'.");
+        }
+        const resultado = conversionRomana(roman);
 
-    response.status(200).json({
-        message: "Success.",
-        resultado: resultado,
-    });
+        response.status(200).json({
+            message: "Success.",
+            resultado: resultado,
+        });
+    } catch (error: any) {
+        response.status(500).json({
+            message: "Error.",
+            error: error.message,
+        });
+    }
 }
 
-async function getDescomposicion(request: Request, response: Response) {
-    const { cadena } = request.body;
-    const resultado = descomposicion(cadena);
+function getDescomposicion(request: Request, response: Response) {
+    try {
+        const { cadena } = request.body;
+        if (cadena === undefined || cadena === null) {
+            throw new Error("Missing field 'cadena'.");
+        }
+        const resultado = descomposicion(cadena);
 
-    response.status(200).json({
-        message: "Success.",
-        resultado: resultado,
-    });
+        response.status(200).json({
+            message: "Success.",
+            resultado: resultado,
+        });
+    } catch (error: any) {
+        response.status(500).json({
+            message: "Error.",
+            error: error.message,
+        });
+    }
 }
 
 // DECLARE ENDPOINTS
